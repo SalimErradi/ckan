@@ -1003,7 +1003,8 @@ class TestPackageSearch(helpers.FunctionalTestBase):
         factories.Dataset(user=user, private=True, owner_org=org['name'])
 
         fq = "capacity:private"
-        results = logic.get_action('package_search')({}, {'fq':fq})['results']
+        results = logic.get_action('package_search')(
+            {}, {'fq': fq})['results']
 
         eq(len(results), 0)
 
@@ -1039,7 +1040,7 @@ class TestPackageSearch(helpers.FunctionalTestBase):
         factories.Dataset(user=user, private=True, owner_org=org['name'])
 
         results = logic.get_action('package_search')(
-            {}, {'include_drafts':True})['results']
+            {}, {'include_drafts': True})['results']
 
         eq(len(results), 1)
         nose.tools.assert_not_equals(results[0]['name'], draft_dataset['name'])
@@ -1085,7 +1086,7 @@ class TestPackageSearch(helpers.FunctionalTestBase):
         factories.Dataset(user=user, private=True, owner_org=org['name'])
 
         results = logic.get_action('package_search')(
-            {'user': sysadmin['name']}, {'include_drafts':False})['results']
+            {'user': sysadmin['name']}, {'include_drafts': False})['results']
 
         eq(len(results), 1)
         names = [r['name'] for r in results]
@@ -1109,7 +1110,7 @@ class TestPackageSearch(helpers.FunctionalTestBase):
         factories.Dataset(user=user, private=True, owner_org=org['name'], name="private-dataset")
 
         results = logic.get_action('package_search')(
-            {'user': user['name']}, {'include_drafts':True})['results']
+            {'user': user['name']}, {'include_drafts': True})['results']
 
         eq(len(results), 3)
         names = [r['name'] for r in results]
