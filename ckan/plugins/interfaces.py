@@ -1564,8 +1564,10 @@ class IPermissionLabels(Interface):
     visible to each user.
 
     Implementations might want to consider mixing in
-    ckan.lib.plugins.DefaultPermissionLabels which provides
+    ``ckan.lib.plugins.DefaultPermissionLabels`` which provides
     default behaviours for these methods.
+
+    See ``ckanext/example_ipermissionlabels`` for an example plugin.
     '''
 
     def get_dataset_labels(self, dataset_obj):
