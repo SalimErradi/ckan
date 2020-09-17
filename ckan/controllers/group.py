@@ -248,9 +248,9 @@ class GroupController(base.BaseController):
         q = c.q = request.params.get('q', '')
         # Search within group
         if c.group_dict.get('is_organization'):
-            q += ' AND owner_org:"%s"' % c.group_dict.get('id')
+            fq_list = ['owner_org:"%s"' % c.group_dict.get('id')]
         else:
-            q += ' groups:"%s"' % c.group_dict.get('name')
+            fq_list = ['groups:"%s"' % c.group_dict.get('name')]
 
         c.description_formatted = \
             h.render_markdown(c.group_dict.get('description'))
@@ -297,7 +297,6 @@ class GroupController(base.BaseController):
             c.fields = []
             search_extras = {}
             c.fields_grouped = {}
-            fq_list = []
             query_params = request.params.mixed()
             for (param, value) in query_params.iteritems():
                 if param in ('q', 'page', 'sort') or not value:
