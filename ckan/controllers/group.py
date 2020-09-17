@@ -248,7 +248,7 @@ class GroupController(base.BaseController):
         q = c.q = request.params.get('q', '')
         # Search within group
         if c.group_dict.get('is_organization'):
-            q += ' owner_org:"%s"' % c.group_dict.get('id')
+            q += ' AND owner_org:"%s"' % c.group_dict.get('id')
         else:
             q += ' groups:"%s"' % c.group_dict.get('name')
 
